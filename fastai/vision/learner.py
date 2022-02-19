@@ -14,9 +14,7 @@ from . import models
 def _is_pool_type(l): return re.search(r'Pool[123]d$', l.__class__.__name__)
 
 # Cell
-def has_pool_type(
-    m # A torch layer
-) -> bool:
+def has_pool_type(m) -> bool:
     "Whether `m` is a pooling layer or has one in its children"
     if _is_pool_type(m): return True
     for l in m.children():
@@ -63,12 +61,12 @@ def _update_first_layer(model, n_in, pretrained):
 
 # Cell
 def create_body(
-    arch, # An architecture generator
-    n_in=3, # Number of input channels
-    pretrained=True, # Whether to grab the pretrained model
-    cut=None # Can either be an `int` or a func to cut the model with
+    arch, # A function that returns a model
+    n_in:int=3, # The number of input channels
+    pretrained:bool=True, # Whether to grab the pretrained weights
+    cut:(int, callable)=None # An index or a function to cut off head of the model
 ):
-    "Cut off the head of a typically pretrained `arch` with `cut`, defaulting to first pooling layer"
+    "Cut off the head of an `arch`, defaulting to the first pulling layer if `cut` is `None`"
     model = arch(pretrained=pretrained)
     _update_first_layer(model, n_in, pretrained)
     #cut = ifnone(cut, cnn_config(arch)['cut'])

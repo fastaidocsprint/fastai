@@ -77,29 +77,6 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <h4 id="has_pool_type" class="doc_header"><code>has_pool_type</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>has_pool_type</code>(<strong><code>m</code></strong>)</p>
 </blockquote>
 <p>Whether <code>m</code> is a pooling layer or has one in its children</p>
-<table>
-<thead><tr>
-<th></th>
-<th>Type</th>
-<th>Default</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong><code>m</code></strong></td>
-<td></td>
-<td></td>
-<td>A torch layer</td>
-</tr>
-<tr>
-<td><strong>Returns</strong></td>
-<td><code>bool</code></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 
 </div>
 
@@ -169,9 +146,9 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_body" class="doc_header"><code>create_body</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_body</code>(<strong><code>arch</code></strong>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="create_body" class="doc_header"><code>create_body</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_body</code>(<strong><code>arch</code></strong>, <strong><code>n_in</code></strong>:<code>int</code>=<em><code>3</code></em>, <strong><code>pretrained</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>cut</code></strong>:<code>(&lt;class 'int'&gt;, &lt;built-in function callable&gt;)</code>=<em><code>None</code></em>)</p>
 </blockquote>
-<p>Cut off the head of a typically pretrained <code>arch</code> with <code>cut</code>, defaulting to first pooling layer</p>
+<p>Cut off the head of an <code>arch</code>, defaulting to the first pulling layer if <code>cut</code> is <code>None</code></p>
 <table>
 <thead><tr>
 <th></th>
@@ -185,25 +162,25 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <td><strong><code>arch</code></strong></td>
 <td></td>
 <td></td>
-<td>An architecture generator</td>
+<td>A function that returns a model</td>
 </tr>
 <tr>
 <td><strong><code>n_in</code></strong></td>
 <td><code>int</code></td>
 <td><code>3</code></td>
-<td>Number of input channels</td>
+<td>The number of input channels</td>
 </tr>
 <tr>
 <td><strong><code>pretrained</code></strong></td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
-<td>Whether to grab the pretrained model</td>
+<td>Whether to grab the pretrained weights</td>
 </tr>
 <tr>
 <td><strong><code>cut</code></strong></td>
-<td><code>NoneType</code></td>
+<td><code>(int, callable)</code></td>
 <td><code>None</code></td>
-<td>Can either be an <code>int</code> or a func to cut the model with</td>
+<td>An index or a function to cut off head of the model</td>
 </tr>
 </tbody>
 </table>
@@ -271,7 +248,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_head" class="doc_header"><code>create_head</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_head</code>(<strong><code>nf</code></strong>, <strong><code>n_out</code></strong>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>0.5</code></em>, <strong><code>concat_pool</code></strong>=<em><code>True</code></em>, <strong><code>first_bn</code></strong>=<em><code>True</code></em>, <strong><code>bn_final</code></strong>=<em><code>False</code></em>, <strong><code>lin_first</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="create_head" class="doc_header"><code>create_head</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_head</code>(<strong><code>nf</code></strong>, <strong><code>n_out</code></strong>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>0.5</code></em>, <strong><code>concat_pool</code></strong>=<em><code>True</code></em>, <strong><code>first_bn</code></strong>=<em><code>True</code></em>, <strong><code>bn_final</code></strong>=<em><code>False</code></em>, <strong><code>lin_first</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Model head that takes <code>nf</code> features, runs through <code>lin_ftrs</code>, and out <code>n_out</code> classes.</p>
 
@@ -386,7 +363,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="default_split" class="doc_header"><code>default_split</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>default_split</code>(<strong><code>m</code></strong>)</p>
+<h4 id="default_split" class="doc_header"><code>default_split</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>default_split</code>(<strong><code>m</code></strong>)</p>
 </blockquote>
 <p>Default split of a model between body and head</p>
 
@@ -446,7 +423,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_cnn_model" class="doc_header"><code>create_cnn_model</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L145" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_cnn_model</code>(<strong><code>arch</code></strong>, <strong><code>n_out</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>custom_head</code></strong>=<em><code>None</code></em>, <strong><code>concat_pool</code></strong>=<em><code>True</code></em>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>0.5</code></em>, <strong><code>first_bn</code></strong>=<em><code>True</code></em>, <strong><code>bn_final</code></strong>=<em><code>False</code></em>, <strong><code>lin_first</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="create_cnn_model" class="doc_header"><code>create_cnn_model</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L143" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_cnn_model</code>(<strong><code>arch</code></strong>, <strong><code>n_out</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>custom_head</code></strong>=<em><code>None</code></em>, <strong><code>concat_pool</code></strong>=<em><code>True</code></em>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>0.5</code></em>, <strong><code>first_bn</code></strong>=<em><code>True</code></em>, <strong><code>bn_final</code></strong>=<em><code>False</code></em>, <strong><code>lin_first</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Create custom convnet architecture</p>
 
@@ -554,7 +531,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cnn_learner" class="doc_header"><code>cnn_learner</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L168" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cnn_learner</code>(<strong><code>dls</code></strong>, <strong><code>arch</code></strong>, <strong><code>normalize</code></strong>=<em><code>True</code></em>, <strong><code>n_out</code></strong>=<em><code>None</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>custom_head</code></strong>=<em><code>None</code></em>, <strong><code>concat_pool</code></strong>=<em><code>True</code></em>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>0.5</code></em>, <strong><code>first_bn</code></strong>=<em><code>True</code></em>, <strong><code>bn_final</code></strong>=<em><code>False</code></em>, <strong><code>lin_first</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="cnn_learner" class="doc_header"><code>cnn_learner</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L166" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cnn_learner</code>(<strong><code>dls</code></strong>, <strong><code>arch</code></strong>, <strong><code>normalize</code></strong>=<em><code>True</code></em>, <strong><code>n_out</code></strong>=<em><code>None</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>custom_head</code></strong>=<em><code>None</code></em>, <strong><code>concat_pool</code></strong>=<em><code>True</code></em>, <strong><code>lin_ftrs</code></strong>=<em><code>None</code></em>, <strong><code>ps</code></strong>=<em><code>0.5</code></em>, <strong><code>first_bn</code></strong>=<em><code>True</code></em>, <strong><code>bn_final</code></strong>=<em><code>False</code></em>, <strong><code>lin_first</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Build a convnet style learner from <code>dls</code> and <code>arch</code></p>
 <table>
@@ -611,7 +588,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <tr>
 <td><strong><code>opt_func</code></strong></td>
 <td><code>function</code></td>
-<td><code>&lt;function Adam at 0x7fbad9edf160&gt;</code></td>
+<td><code>&lt;function Adam at 0x7f2d141303a0&gt;</code></td>
 <td><em>No Content</em></td>
 </tr>
 <tr>
@@ -633,7 +610,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <td><em>No Content</em></td>
 </tr>
 <tr>
-<td><strong><code>metrics</code></strong></td>
+<td><strong><a href="/metrics.html"><code>metrics</code></a></strong></td>
 <td><code>NoneType</code></td>
 <td><code>None</code></td>
 <td><em>No Content</em></td>
@@ -689,7 +666,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <tr>
 <td><strong><code>init</code></strong></td>
 <td><code>function</code></td>
-<td><code>&lt;function kaiming_normal_ at 0x7fbb07195430&gt;</code></td>
+<td><code>&lt;function kaiming_normal_ at 0x7f2d4952d4c0&gt;</code></td>
 <td><em>No Content</em></td>
 </tr>
 <tr>
@@ -846,7 +823,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_unet_model" class="doc_header"><code>create_unet_model</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L198" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_unet_model</code>(<strong><code>arch</code></strong>, <strong><code>n_out</code></strong>, <strong><code>img_size</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>blur</code></strong>=<em><code>False</code></em>, <strong><code>blur_final</code></strong>=<em><code>True</code></em>, <strong><code>self_attention</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>, <strong><code>last_cross</code></strong>=<em><code>True</code></em>, <strong><code>bottle</code></strong>=<em><code>False</code></em>, <strong><code>act_cls</code></strong>=<em><code>ReLU</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>norm_type</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="create_unet_model" class="doc_header"><code>create_unet_model</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L196" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_unet_model</code>(<strong><code>arch</code></strong>, <strong><code>n_out</code></strong>, <strong><code>img_size</code></strong>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>blur</code></strong>=<em><code>False</code></em>, <strong><code>blur_final</code></strong>=<em><code>True</code></em>, <strong><code>self_attention</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>, <strong><code>last_cross</code></strong>=<em><code>True</code></em>, <strong><code>bottle</code></strong>=<em><code>False</code></em>, <strong><code>act_cls</code></strong>=<em><code>ReLU</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>norm_type</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Create custom unet architecture</p>
 
@@ -888,7 +865,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="unet_learner" class="doc_header"><code>unet_learner</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L207" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unet_learner</code>(<strong><code>dls</code></strong>, <strong><code>arch</code></strong>, <strong><code>normalize</code></strong>=<em><code>True</code></em>, <strong><code>n_out</code></strong>=<em><code>None</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>blur</code></strong>=<em><code>False</code></em>, <strong><code>blur_final</code></strong>=<em><code>True</code></em>, <strong><code>self_attention</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>, <strong><code>last_cross</code></strong>=<em><code>True</code></em>, <strong><code>bottle</code></strong>=<em><code>False</code></em>, <strong><code>act_cls</code></strong>=<em><code>ReLU</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>norm_type</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="unet_learner" class="doc_header"><code>unet_learner</code><a href="https://github.com/fastai/fastai/tree/master/fastai/vision/learner.py#L205" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unet_learner</code>(<strong><code>dls</code></strong>, <strong><code>arch</code></strong>, <strong><code>normalize</code></strong>=<em><code>True</code></em>, <strong><code>n_out</code></strong>=<em><code>None</code></em>, <strong><code>pretrained</code></strong>=<em><code>True</code></em>, <strong><code>config</code></strong>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>, <strong><code>cut</code></strong>=<em><code>None</code></em>, <strong><code>n_in</code></strong>=<em><code>3</code></em>, <strong><code>blur</code></strong>=<em><code>False</code></em>, <strong><code>blur_final</code></strong>=<em><code>True</code></em>, <strong><code>self_attention</code></strong>=<em><code>False</code></em>, <strong><code>y_range</code></strong>=<em><code>None</code></em>, <strong><code>last_cross</code></strong>=<em><code>True</code></em>, <strong><code>bottle</code></strong>=<em><code>False</code></em>, <strong><code>act_cls</code></strong>=<em><code>ReLU</code></em>, <strong><code>init</code></strong>=<em><code>kaiming_normal_</code></em>, <strong><code>norm_type</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Build a unet learner from <code>dls</code> and <code>arch</code></p>
 <table>
@@ -945,7 +922,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <tr>
 <td><strong><code>opt_func</code></strong></td>
 <td><code>function</code></td>
-<td><code>&lt;function Adam at 0x7fbad9edf160&gt;</code></td>
+<td><code>&lt;function Adam at 0x7f2d141303a0&gt;</code></td>
 <td><em>No Content</em></td>
 </tr>
 <tr>
@@ -967,7 +944,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <td><em>No Content</em></td>
 </tr>
 <tr>
-<td><strong><code>metrics</code></strong></td>
+<td><strong><a href="/metrics.html"><code>metrics</code></a></strong></td>
 <td><code>NoneType</code></td>
 <td><code>None</code></td>
 <td><em>No Content</em></td>
@@ -1065,7 +1042,7 @@ nb_path: "nbs/21_vision.learner.ipynb"
 <tr>
 <td><strong><code>init</code></strong></td>
 <td><code>function</code></td>
-<td><code>&lt;function kaiming_normal_ at 0x7fbb07195430&gt;</code></td>
+<td><code>&lt;function kaiming_normal_ at 0x7f2d4952d4c0&gt;</code></td>
 <td><em>No Content</em></td>
 </tr>
 <tr>
