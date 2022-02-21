@@ -876,7 +876,8 @@ modules = ["vision/widgets.py",
            "callback/captum.py",
            "callback/azureml.py",
            "test_utils.py",
-           "_pytorch_doc.py"]
+           "_pytorch_doc.py",
+           "vision/widgets.py"]
 
 doc_url = "https://docs.fast.ai/"
 
