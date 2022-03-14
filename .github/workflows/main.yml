@@ -66,10 +66,10 @@ jobs:
       uses: actions/checkout@v2
     - name: Install libraries
       run: |
-        pip install git+git://github.com/fastai/fastcore.git -Uq
-        pip install git+git://github.com/fastai/nbdev.git -Uq
-        pip install -Uq fastprogress
-        pip install -Uqe .[dev]
+        pip install git+git://github.com/fastai/fastcore.git -U
+        pip install git+git://github.com/fastai/nbdev.git -U
+        pip install -U fastprogress
+        pip install -Ue .[dev]
     
     - name: check for cache hit
       uses: actions/cache@v2
